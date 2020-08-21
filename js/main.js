@@ -3,7 +3,7 @@ loader = document.getElementById("loader"),
 sentinel = document.getElementById("sentinel");
 
 let prevRatio = 0.0;
-const rootMargin = "800px",
+const rootMargin = "100px",
 observer = new IntersectionObserver((entries, observer) => {
 	entries.forEach(entry => {
 		if (entry.intersectionRatio > prevRatio)

@@ -3,7 +3,7 @@ function isImage(url) {
 }
 
 async function getCat() {
-	_url = "http://aws.random.cat/meow"
+	_url = "https://aws.random.cat/meow"
 	res = await fetch(_url)
 	res = await res.json()
 	return res['file']
@@ -23,28 +23,30 @@ async function getFox() {
 	return res['image']
 }
 
+const animalFetchMap = {
+	'cat': getCat,
+	'dog': getDog,
+	'fox': getFox,
+}
+
+const allImages = new Set();
+async function getAnimal(type, count) {
+	const getAnimal = animalFetchMap[type];
+	const animals = new Set();
+	while(animals.size < count) {
+		animal = await getAnimal()
+		if(isImage(animal) && !allImages.has(animal)) {
+			animals.add(animal);
+			allImages.add(animal);
+		}
+	}
+	return Array.from(animals);
+}
+
 async function fetchImages(num_cats = 3, num_dogs = 3, num_foxes = 3) {
-	const cats = new Set(),
-		dogs = new Set(),
-		foxes = new Set();
-	while(cats.size < num_cats) {
-		cat = await getCat()
-		if(isImage(cat))
-			cats.add(cat);
-	}
-	while(dogs.size < num_dogs) {
-		dog = await getDog()
-		if (isImage(dog))
-			dogs.add(dog);
-	}
-	while(foxes.size < num_foxes) {
-		fox = await getFox()
-		if (isImage(fox))
-			foxes.add(fox);
-	}
 	return [
-		...Array.from(cats),
-		...Array.from(dogs),
-		...Array.from(foxes),
+		... await getAnimal('cat', num_cats),
+		... await getAnimal('dog', num_dogs),
+		... await getAnimal('fox', num_foxes),
 	]
 }

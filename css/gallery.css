@@ -1,0 +1,17 @@
+#gallery {
+	display: flex;
+	/* background-color: #000; */
+}
+
+.gallery-col {
+	display: flex;
+	flex-direction: column;
+	flex-basis: calc(100%/3);
+	padding: 0 5px;
+}
+
+.gallery-col * {
+	width: 100%;
+	height: auto;
+	margin: 5px;
+}
