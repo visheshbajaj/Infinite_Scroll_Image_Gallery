@@ -1,3 +1,9 @@
-const gallery = document.getElementById('gallery');
+const gallery = document.getElementById('gallery'),
+	loader = document.getElementById("loader");
 
-fetchImages().then(imgs => appendImagesToDOM(imgs, gallery));
+loadImages();
+
+window.addEventListener('scroll', function() {
+  if (gallery.scrollTop + gallery.clientHeight >= gallery.scrollHeight)
+  	loadImages()
+});
