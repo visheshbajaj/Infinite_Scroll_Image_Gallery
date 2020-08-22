@@ -1,3 +1,21 @@
+@media only screen and (max-width: 768px) {
+    #banner{
+        background-image: url('../images/banner.jpg');
+        height: 50% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .banner-text{
+        color: #fff;
+        text-align: center;
+        font-size: 6vh !important;
+    }
+
+  }
+
 #banner{
     background-image: url('../images/banner.jpg');
     height: 40%;
